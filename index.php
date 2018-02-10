@@ -25,7 +25,8 @@
 <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
     <main role="main" class="inner cover mt-auto">
         <section class="cover-message">
-            <h1 class="cover-heading">Floor is Lava</h1>
+            <h1 class="cover-heading"><span class="text-danger">Floor</span> is <span class="text-warning">Lava</span>
+            </h1>
         </section>
         <section class="cover-message">
             <pre><code class="highscore-heading text-success lead">High Score:</code></pre>
@@ -70,8 +71,8 @@
                         $userName  = $userInfo[0]; // username
                         $userScore = $userInfo[1]; // score
                         
-                        echo "<kbd class='lead description text-warning highscore-description'>$userName
-                                <span class='text-danger'>$userScore seconds</span></kbd>";
+                        echo "<code class='lead highscore-description'><kbd class='text-warning'>$userName</kbd>
+                                <span class='text-white'>$userScore seconds</span></code>";
                         $_SESSION['highscoreUsername'] = $userName;
                         $_SESSION['highscore']         = $userScore;
                     }
@@ -79,7 +80,7 @@
                     // no score retrieved
                     else
                     {
-                        echo "<kbd class='lead description text-warning highscore-description'>None</kbd>";
+                        echo "<kbd class='lead description text-white highscore-description'>None</kbd>";
                     }
                 }
             
