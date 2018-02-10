@@ -16,6 +16,8 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- Custom styles for this template -->
     <link href="css/index.css" rel="stylesheet">
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Unica+One" rel="stylesheet">
 </head>
 
 <body class="text-center">
@@ -32,14 +34,14 @@
             <?php
                 $userInfo = getUserInfo();
                 printHighestScore($userInfo);
-
+                
                 function getUserInfo()
                 {
                     $filename          = 'db/scores.txt';
                     $fHandle           = fopen($filename, 'r'); // attempt to open the file
                     $highestScoreFound = false;
                     $userInfo          = null;
-
+                    
                     // successfully opened file
                     if ($fHandle)
                     {
@@ -47,7 +49,7 @@
                         while (!feof($fHandle) && !$highestScoreFound)
                         {
                             $buffer = fgets($fHandle); // get the next line
-
+                            
                             // contains an entry
                             if ($buffer)
                             {
@@ -59,7 +61,7 @@
                     }
                     return $userInfo;
                 }
-
+                
                 function printHighestScore($userInfo)
                 {
                     // a score has been successfully retrieved
@@ -67,20 +69,23 @@
                     {
                         $userName  = $userInfo[0]; // username
                         $userScore = $userInfo[1]; // score
-
-                        echo "<code class='lead description text-warning highscore-description'>$userName <span class='text-danger'>$userScore seconds</span></code>";
+                        
+                        echo "<kbd class='lead description text-warning highscore-description'>$userName
+                                <span class='text-danger'>$userScore seconds</span></kbd>";
                         $_SESSION['highscoreUsername'] = $userName;
-                        $_SESSION['highscore'] = $userScore;
+                        $_SESSION['highscore']         = $userScore;
                     }
-
+                    
                     // no score retrieved
                     else
                     {
-                        echo "<code class='lead description text-warning highscore-description'>None</code>";
+                        echo "<kbd class='lead description text-warning highscore-description'>None</kbd>";
                     }
                 }
+            
             ?>
         </section>
+        <!-- send username input to gamescreen page -->
         <form class="form-signin" action="html/gamescreen.php" method="post">
             <label for="username" class="sr-only">username</label>
             <input type="text" name="username" class="form-control" placeholder="username" required autofocus>
@@ -94,9 +99,6 @@
         </div>
     </footer>
 </div>
-
-
-
 
 <!-- Bootstrap core JavaScript
     ================================================== -->
