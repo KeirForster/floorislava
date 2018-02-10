@@ -14,26 +14,49 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <!-- Custom styles for this template -->
+    <link href="../css/gamescreen.css" rel="stylesheet">
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Unica+One" rel="stylesheet">
 </head>
 
 <body class="text-center">
-<h1>Gamescreen</h1>
-<?php
-    if (isset($_POST['username']))
-    {
-        echo '<h3>Welcome: ' . $_POST['username'] . '</h3>';
-        echo '<h3>Highest score:</h3>';
-        echo "<h3>" . $_SESSION['highscoreUsername'] . "</h3>";
-        echo "<h3>" . $_SESSION['highscore'] . "</h3>";
-    }
-    
-    else
-    {
-        echo 'no username set!';
-    }
-?>
-
+    <div class="container-fluid">
+        <header class="top-section">
+            <div class="row no-gutters">
+                <div class="col-12">
+                    <h1 class="game-title">Floor is Lava</h1>
+                    <?php
+                        // print header info
+                        echo "<code class='lead text-danger highscore-description'>High Score:
+                                    <kbd class='text-warning'>" . $_SESSION['highscoreUsername'] . "</kbd>
+                                    <span class='text-white'>" . $_SESSION['highscore'] . " seconds</span>
+                                    </code>";
+        
+                        // username successfully retrieved
+                        if (isset($_POST['username']))
+                        {
+                            echo "<code class='text-success lead'>Player:
+                                    <kbd><span class='text-white'>" . $_POST["username"] . "</span></code></kbd>";
+                        }
+        
+                        // no username found
+                        else
+                        {
+                            echo "<code class='text-success lead'>Player:
+                                    <kbd><span class='text-warning'>None</span></code></kbd>";
+                        }
+                    ?>
+                </div>
+            </div>
+        </header>
+        <main class="row">
+            <div class="col-12 bottom-section">
+                <canvas id="gameCanvas"></canvas>
+            </div>
+        </main>
+    </div>
+</body>
 <!-- Bootstrap core JavaScript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
