@@ -22,31 +22,39 @@
 
 <body class="text-center">
     <div class="container-fluid">
+        <!-- title section -->
         <header class="top-section">
+            <!-- game info -->
             <div class="row no-gutters">
                 <div class="col-12">
                     <h1 class="game-title">Floor is Lava</h1>
                     <?php
                         // print header info
-                        echo "<code class='lead text-danger highscore-description'>High Score:
+                        echo "<code class='lead text-success highscore-description'>High Score:
                                     <kbd class='text-warning'>" . $_SESSION['highscoreUsername'] . "</kbd>
-                                    <span class='text-white'>" . $_SESSION['highscore'] . " seconds</span>
+                                    <span class='text-danger'>" . $_SESSION['highscore'] . " seconds</span>
                                     </code>";
         
                         // username successfully retrieved
                         if (isset($_POST['username']))
                         {
-                            echo "<code class='text-success lead'>Player:
-                                    <kbd><span class='text-white'>" . $_POST["username"] . "</span></code></kbd>";
+                            echo "<code class='text-primary lead player-description'>Player:
+                                    <kbd class='text-white'>" . $_POST["username"] . "</kbd></code>";
                         }
         
                         // no username found
                         else
                         {
                             echo "<code class='text-success lead'>Player:
-                                    <kbd><span class='text-warning'>None</span></code></kbd>";
+                                    <kbd><span class='text-warning'>None</span></kbd></code>";
                         }
                     ?>
+                </div>
+            </div>
+            <!-- player score -->
+            <div class="row no-gutters player-score">
+                <div class="col-12">
+                    <code class="lead"><span class='text-white'><span id='player-time'>0</span> seconds</span></code>
                 </div>
             </div>
         </header>
@@ -56,6 +64,44 @@
             </div>
         </main>
     </div>
+    <!-- start the game timer -->
+    <script>
+        document.onload = start();
+        
+        function start()
+        {
+            var playerScore = document.querySelector("#player-time");
+            var canvas = document.querySelector("#gameCanvas");
+            canvas.onclick = stopTimer;
+            var millis = 0;
+            var seconds = 0;
+            var minutes = 0;
+            var timer = setInterval(startTimer, 10);
+            
+            function startTimer()
+            {
+                millis++;
+                
+                if (millis == 100)
+                {
+                    seconds++;
+                    millis = 0;
+                }
+
+                if (seconds == 60)
+                {
+                    minutes++;
+                    seconds = 0
+                }
+                playerScore.innerHTML = `${minutes}:${seconds}.${millis < 10 ? 0 : ''}${millis}`;
+            }
+            
+            function stopTimer()
+            {
+                clearInterval(timer);
+            }
+        }
+    </script>
 </body>
 <!-- Bootstrap core JavaScript
     ================================================== -->

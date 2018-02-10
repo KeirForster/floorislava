@@ -33,13 +33,21 @@ body {
 }
 
 .top-section .game-title {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     font-size: 3rem;
     font-family: 'Unica One', cursive;
 }
 
 .top-section .highscore-description {
     padding-right: 2em;
+}
+
+.top-section .player-score {
+    padding-top: 10px;
+}
+
+.top-section .player-score {
+    /*text-align: left!important;*/
 }
 
 .bottom-section {
