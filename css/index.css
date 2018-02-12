@@ -6,6 +6,7 @@ html,
 body {
     height: 100%;
     background-color: #333;
+    font-size: 1rem;
 }
 
 body {
@@ -27,39 +28,95 @@ body {
 /*
  * Main
  */
-.cover {
-    padding: 0 1.5rem;
+@media (min-width: 300px) {
+    .cover .cover-message {
+        padding-bottom: 1.75em;
+    }
+
+    .cover .highscore-message {
+        padding-bottom: 5em;
+    }
+
+    .cover-container .cover-heading {
+        font-size: 2.75rem;
+    }
+
+    .cover .highscore-heading {
+        font-size: 1.5rem;
+    }
+
+    .cover .highscore-description {
+        font-size: 1.25rem;
+    }
+
+    .cover .form-signin input[name="username"] {
+        margin-bottom: 30px;
+        height: 4rem;
+        font-size: 2rem;
+    }
+
+    .cover .form-signin button[type="submit"] {
+        font-size: 2rem;
+        height: 4rem;
+    }
+}
+
+@media (min-width: 576px) {
+    .cover-container .cover-heading {
+        font-size: 5rem;
+    }
+
+    .cover .highscore-heading {
+        font-size: 1.75rem;
+    }
+
+    .cover .highscore-description {
+        font-size: 1.75rem;
+    }
+
+    .cover .highscore-description kbd {
+        font-size: 1.75rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .cover-container .cover-heading {
+        font-size: 6rem;
+    }
+
+    .cover .highscore-heading {
+        font-size: 3rem;
+    }
+
+    .cover .highscore-description {
+        font-size: 2rem;
+    }
+
+    .cover .highscore-description kbd {
+        font-size: 1.75rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .cover-container .cover-heading {
+        font-size: 6rem;
+    }
+
+    .cover .highscore-heading {
+        font-size: 3rem;
+    }
+
+    .cover .highscore-description {
+        font-size: 2rem;
+    }
+
+    .cover .highscore-description kbd {
+        font-size: 1.75rem;
+    }
 }
 
 .cover .cover-heading {
-    font-size: 6rem;
     font-family: 'Unica One', cursive;
-}
-
-.cover .highscore-heading {
-    font-size: 2.75rem;
-}
-
-.cover .highscore-description {
-    font-size: 1.5rem;
-}
-
-.cover .highscore-description kbd {
-    font-size: 1.5rem;
-}
-
-.cover .cover-message {
-    padding-bottom: 3em;
-}
-
-.cover .form-signin input[name="username"] {
-    margin-bottom: 30px;
-    height: 80px;
-    font-size: 2.25rem;
-}
-
-.cover .form-signin button[type="submit"] {
-    font-size: 2.25rem;
 }
 
 /*
