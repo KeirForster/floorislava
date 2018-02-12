@@ -28,7 +28,7 @@
             <h1 class="cover-heading"><span class="text-danger">Floor</span> is <span class="text-warning">Lava</span>
             </h1>
         </section>
-        <section class="cover-message">
+        <section class="cover-message highscore-message">
             <pre><code class="highscore-heading text-success lead">High Score:</code></pre>
 
             <!--  Print the highest score stored -->

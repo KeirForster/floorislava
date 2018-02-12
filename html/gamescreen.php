@@ -39,7 +39,7 @@
                         if (isset($_POST['username']))
                         {
                             echo "<code class='text-primary lead player-description'>Player:
-                                    <kbd class='text-white'>" . $_POST["username"] . "</kbd></code>";
+                                    <kbd class='player-username'>" . $_POST["username"] . "</kbd></code>";
                         }
         
                         // no username found
