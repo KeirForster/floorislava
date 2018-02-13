@@ -4,6 +4,7 @@
 
 html,
 body {
+    font-size: 1rem;
     height: 100%;
     background: #333;
 }
@@ -26,28 +27,131 @@ body {
 /*
  * Main
  */
+
 .top-section {
     height: 20%;
-    padding: 20px 0;
+    padding: 10px 0 0 0;
     /*border: 2px solid greenyellow;*/
 }
 
 .top-section .game-title {
-    padding-bottom: 10px;
-    font-size: 3rem;
     font-family: 'Unica One', cursive;
-}
-
-.top-section .highscore-description {
-    padding-right: 2em;
+    margin-bottom: 0;
 }
 
 .top-section .player-score {
-    padding-top: 10px;
+    padding-top: 0;
 }
 
-.top-section .player-score {
-    /*text-align: left!important;*/
+.top-section .player-description {
+    display: block;
+}
+
+.top-section .player-username {
+    color: greenyellow;
+}
+
+@media (min-width: 300px) {
+    .top-section .game-title {
+        font-size: 1.5rem;
+    }
+
+    .top-section .highscore-description {
+        font-size: 1rem;
+    }
+
+    .top-section .player-description {
+        font-size: 1rem;
+    }
+
+    .top-section .highscore-description .highscore-description-written {
+        display: none;
+    }
+}
+
+@media (min-width: 375px) {
+    .top-section .game-title {
+        font-size: 1.75rem;
+    }
+
+    .top-section .highscore-description .highscore-description-written {
+        display: inline-block;
+    }
+}
+
+@media (min-width: 576px) {
+    .top-section .game-title {
+        font-size: 3rem;
+    }
+
+    .top-section .highscore-description {
+        font-size: 1.5rem;
+    }
+
+    .top-section .player-description {
+        font-size: 1.5rem;
+    }
+
+    .top-section .player-score {
+        padding-top: 1rem;
+    }
+
+    .top-section .player-score code {
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 992px) {
+
+    .top-section .highscore-description {
+        font-size: 1.75rem;
+    }
+
+    .top-section .player-description {
+        font-size: 1.75rem;
+    }
+
+    .top-section .player-score {
+        padding-top: 1.75rem;
+    }
+
+    .top-section .player-score code {
+        font-size: 1.75rem;
+    }
+
+    .top-section .player-score {
+        padding-top: 0.5rem;
+    }
+
+    .top-section .player-description {
+        display: inline-block;
+    }
+}
+
+@media (min-width: 1200px) {
+    .top-section .game-title {
+        font-size: 4rem;
+    }
+
+    .top-section .highscore-description {
+        font-size: 2rem;
+    }
+
+    .top-section .player-description {
+        font-size: 2rem;
+    }
+
+    .top-section .player-score {
+        padding-top: 2rem;
+    }
+
+    .top-section .player-score code {
+        font-size: 2rem;
+    }
+
+    .top-section .player-score {
+        padding-top: 0;
+    }
 }
 
 .bottom-section {
