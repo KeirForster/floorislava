@@ -59,13 +59,12 @@ body {
     .top-section .highscore-description {
         font-size: 1rem;
     }
+    .top-section .highscore-description .highscore-description-extra {
+        display: none;
+    }
 
     .top-section .player-description {
         font-size: 1rem;
-    }
-
-    .top-section .highscore-description .highscore-description-written {
-        display: none;
     }
 }
 
@@ -74,7 +73,7 @@ body {
         font-size: 1.75rem;
     }
 
-    .top-section .highscore-description .highscore-description-written {
+    .top-section .highscore-description .highscore-description-extra {
         display: inline-block;
     }
 }
@@ -159,7 +158,7 @@ body {
     padding: 0;
 }
 
-#gameCanvas {
+.bottom-section #gameCanvas {
     width: 100%;
     height: 100%;
     border: 2px solid greenyellow;
