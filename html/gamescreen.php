@@ -21,87 +21,87 @@
 </head>
 
 <body class="text-center">
-    <div class="container-fluid">
-        <!-- title section -->
-        <header class="top-section">
-            <!-- game info -->
-            <div class="row no-gutters">
-                <div class="col-12">
-                    <h1 class="game-title">Floor is Lava</h1>
-                    <?php
-                        // print header info
-                        echo "<code class='lead text-success highscore-description'>High Score:
+<div class="container-fluid">
+    <!-- title section -->
+    <header class="top-section">
+        <!-- game info -->
+        <div class="row no-gutters">
+            <div class="col-12">
+                <h1 class="game-title">Floor is Lava</h1>
+                <?php
+                    // print header info
+                    echo "<code class='lead text-success highscore-description'>High Score:
                                     <kbd class='text-warning'>" . $_SESSION['highscoreUsername'] . "</kbd>
-                                    <span class='text-danger'>" . $_SESSION['highscore'] . " seconds</span>
+                                    <span class='text-danger'>" . $_SESSION['highscore'] . " <span class='highscore-description-written'>seconds</span></span>
                                     </code>";
-        
-                        // username successfully retrieved
-                        if (isset($_POST['username']))
-                        {
-                            echo "<code class='text-primary lead player-description'>Player:
+                    
+                    // username successfully retrieved
+                    if (isset($_POST['username']))
+                    {
+                        echo "<code class='text-primary lead player-description'>Player:
                                     <kbd class='player-username'>" . $_POST["username"] . "</kbd></code>";
-                        }
-        
-                        // no username found
-                        else
-                        {
-                            echo "<code class='text-success lead'>Player:
+                    }
+                    
+                    // no username found
+                    else
+                    {
+                        echo "<code class='text-success lead'>Player:
                                     <kbd><span class='text-warning'>None</span></kbd></code>";
-                        }
-                    ?>
-                </div>
+                    }
+                ?>
             </div>
-            <!-- player score -->
-            <div class="row no-gutters player-score">
-                <div class="col-12">
-                    <code class="lead"><span class='text-white'><span id='player-time'>0</span> seconds</span></code>
-                </div>
+        </div>
+        <!-- player score -->
+        <div class="row no-gutters player-score">
+            <div class="col-12">
+                <code class="lead"><span class='text-white'><span id='player-time'>0</span> seconds</span></code>
             </div>
-        </header>
-        <main class="row">
-            <div class="col-12 bottom-section">
-                <canvas id="gameCanvas"></canvas>
-            </div>
-        </main>
-    </div>
-    <!-- start the game timer -->
-    <script>
-        document.onload = start();
-        
-        function start()
-        {
-            var playerScore = document.querySelector("#player-time");
-            var canvas = document.querySelector("#gameCanvas");
-            canvas.onclick = stopTimer;
-            var millis = 0;
-            var seconds = 0;
-            var minutes = 0;
-            var timer = setInterval(startTimer, 10);
-            
-            function startTimer()
-            {
-                millis++;
-                
-                if (millis == 100)
-                {
-                    seconds++;
-                    millis = 0;
-                }
+        </div>
+    </header>
+    <main class="row">
+        <div class="col-12 bottom-section">
+            <canvas id="gameCanvas"></canvas>
+        </div>
+    </main>
+</div>
+<!-- start the game timer -->
+<script>
+    document.onload = start();
 
-                if (seconds == 60)
-                {
-                    minutes++;
-                    seconds = 0
-                }
-                playerScore.innerHTML = `${minutes}:${seconds}.${millis < 10 ? 0 : ''}${millis}`;
-            }
-            
-            function stopTimer()
+    function start()
+    {
+        var playerScore = document.querySelector("#player-time");
+        var canvas = document.querySelector("#gameCanvas");
+        canvas.onclick = stopTimer;
+        var millis = 0;
+        var seconds = 0;
+        var minutes = 0;
+        var timer = setInterval(startTimer, 10);
+
+        function startTimer()
+        {
+            millis++;
+
+            if (millis == 100)
             {
-                clearInterval(timer);
+                seconds++;
+                millis = 0;
             }
+
+            if (seconds == 60)
+            {
+                minutes++;
+                seconds = 0
+            }
+            playerScore.innerHTML = `${minutes}:${seconds}.${millis < 10 ? 0 : ''}${millis}`;
         }
-    </script>
+
+        function stopTimer()
+        {
+            clearInterval(timer);
+        }
+    }
+</script>
 </body>
 <!-- Bootstrap core JavaScript
     ================================================== -->
