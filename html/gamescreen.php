@@ -32,7 +32,7 @@
                     // print header info
                     echo "<code class='lead text-success highscore-description'>High Score:
                                     <kbd class='text-warning'>" . $_SESSION['highscoreUsername'] . "</kbd>
-                                    <span class='text-danger'>" . $_SESSION['highscore'] . " <span class='highscore-description-written'>seconds</span></span>
+                                    <span class='text-danger'>" . $_SESSION['highscore'] . " <span class='highscore-description-extra'>seconds</span></span>
                                     </code>";
                     
                     // username successfully retrieved
@@ -54,7 +54,7 @@
         <!-- player score -->
         <div class="row no-gutters player-score">
             <div class="col-12">
-                <code class="lead"><span class='text-white'><span id='player-time'>0</span> seconds</span></code>
+                <code class="lead"><span class='text-white'><span id='player-time'></span> seconds</span></code>
             </div>
         </div>
     </header>
@@ -66,41 +66,23 @@
 </div>
 <!-- start the game timer -->
 <script>
-    document.onload = start();
-
-    function start()
+    onload = function()
     {
-        var playerScore = document.querySelector("#player-time");
-        var canvas = document.querySelector("#gameCanvas");
-        canvas.onclick = stopTimer;
-        var millis = 0;
-        var seconds = 0;
-        var minutes = 0;
-        var timer = setInterval(startTimer, 10);
-
-        function startTimer()
+        var timer = new GS_Timing(document.getElementById('player-time'));
+        timer.start();
+        timer.elem.onclick = function()
         {
-            millis++;
-
-            if (millis == 100)
-            {
-                seconds++;
-                millis = 0;
-            }
-
-            if (seconds == 60)
-            {
-                minutes++;
-                seconds = 0
-            }
-            playerScore.innerHTML = `${minutes}:${seconds}.${millis < 10 ? 0 : ''}${millis}`;
-        }
-
-        function stopTimer()
-        {
-            clearInterval(timer);
-        }
-    }
+           if (timer.isRunning)
+           {
+               timer.stop();
+           }
+           
+           else
+           {
+               timer.resume();
+           }
+        };
+    };
 </script>
 </body>
 <!-- Bootstrap core JavaScript
@@ -116,6 +98,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+<!-- My scripts -->
+<script src="../js/gamescreen.js"></script>
 </body>
 
 </html>
