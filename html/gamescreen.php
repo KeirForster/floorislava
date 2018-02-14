@@ -1,6 +1,6 @@
 <?php
-    // Start the session
-    session_start();
+// Start the session
+session_start();
 ?>
 
 <html lang="en">
@@ -29,25 +29,25 @@
             <div class="col-12">
                 <h1 class="game-title">Floor is Lava</h1>
                 <?php
-                    // print header info
-                    echo "<code class='lead text-success highscore-description'>High Score:
+                // print header info
+                echo "<code class='lead text-success highscore-description'>High Score:
                                     <kbd class='text-warning'>" . $_SESSION['highscoreUsername'] . "</kbd>
                                     <span class='text-danger'>" . $_SESSION['highscore'] . " <span class='highscore-description-extra'>seconds</span></span>
                                     </code>";
-                    
-                    // username successfully retrieved
-                    if (isset($_POST['username']))
-                    {
-                        echo "<code class='text-primary lead player-description'>Player:
+
+                // username successfully retrieved
+                if (isset($_POST['username']))
+                {
+                    echo "<code class='text-primary lead player-description'>Player:
                                     <kbd class='player-username'>" . $_POST["username"] . "</kbd></code>";
-                    }
-                    
-                    // no username found
-                    else
-                    {
-                        echo "<code class='text-success lead'>Player:
+                }
+
+                // no username found
+                else
+                {
+                    echo "<code class='text-success lead'>Player:
                                     <kbd><span class='text-warning'>None</span></kbd></code>";
-                    }
+                }
                 ?>
             </div>
         </div>
@@ -72,16 +72,25 @@
         timer.start();
         timer.elem.onclick = function()
         {
-           if (timer.isRunning)
-           {
-               timer.stop();
-           }
-           
-           else
-           {
-               timer.resume();
-           }
+            if (timer.isRunning)
+            {
+                timer.stop();
+            }
+
+            else
+            {
+                timer.resume();
+            }
         };
+        let game = new GS_run(document.getElementById('gameCanvas'));
+        game.start();
+        //was trying to use the mouse position to show a basic checker
+        // game.elem.onmouseover = function()
+        // {
+        //     let mouseX = game.getMousePos(game.elem)[0];
+        //     let mouseY = game.getMousePos(game.elem)[1];
+        //     console.log(mouseX + " " + mouseY);
+        // };
     };
 </script>
 </body>
