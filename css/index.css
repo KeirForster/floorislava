@@ -6,6 +6,10 @@ html,
 body {
     height: 100%;
     background-color: #333;
+<<<<<<< HEAD
+=======
+    font-size: 1rem;
+>>>>>>> 0735a88a88af407e33bcaccc672ce29fd5cd2861
 }
 
 body {
@@ -27,6 +31,7 @@ body {
 /*
  * Main
  */
+<<<<<<< HEAD
 
 /* Handles title and volcano hanging effects */
 @-webkit-keyframes hvr-hang {
@@ -157,6 +162,97 @@ body {
 
 .cover .form-signin button[type="submit"] {
     font-size: 2.25rem;
+=======
+@media (min-width: 300px) {
+    .cover .cover-message {
+        padding-bottom: 1.75em;
+    }
+
+    .cover .highscore-message {
+        padding-bottom: 5em;
+    }
+
+    .cover-container .cover-heading {
+        font-size: 2.75rem;
+    }
+
+    .cover .highscore-heading {
+        font-size: 1.5rem;
+    }
+
+    .cover .highscore-description {
+        font-size: 1.25rem;
+    }
+
+    .cover .form-signin input[name="username"] {
+        margin-bottom: 30px;
+        height: 4rem;
+        font-size: 2rem;
+    }
+
+    .cover .form-signin button[type="submit"] {
+        font-size: 2rem;
+        height: 4rem;
+    }
+}
+
+@media (min-width: 576px) {
+    .cover-container .cover-heading {
+        font-size: 5rem;
+    }
+
+    .cover .highscore-heading {
+        font-size: 1.75rem;
+    }
+
+    .cover .highscore-description {
+        font-size: 1.75rem;
+    }
+
+    .cover .highscore-description kbd {
+        font-size: 1.75rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .cover-container .cover-heading {
+        font-size: 6rem;
+    }
+
+    .cover .highscore-heading {
+        font-size: 3rem;
+    }
+
+    .cover .highscore-description {
+        font-size: 2rem;
+    }
+
+    .cover .highscore-description kbd {
+        font-size: 1.75rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .cover-container .cover-heading {
+        font-size: 6rem;
+    }
+
+    .cover .highscore-heading {
+        font-size: 3rem;
+    }
+
+    .cover .highscore-description {
+        font-size: 2rem;
+    }
+
+    .cover .highscore-description kbd {
+        font-size: 1.75rem;
+    }
+}
+
+.cover .cover-heading {
+    font-family: 'Unica One', cursive;
+>>>>>>> 0735a88a88af407e33bcaccc672ce29fd5cd2861
 }
 
 /*
@@ -164,4 +260,8 @@ body {
  */
 .mastfoot {
     color: rgba(255, 255, 255, .5);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 0735a88a88af407e33bcaccc672ce29fd5cd2861

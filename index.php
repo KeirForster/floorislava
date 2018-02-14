@@ -24,6 +24,7 @@
 
 <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
     <main role="main" class="inner cover mt-auto">
+<<<<<<< HEAD
         <section class="cover-message cover-message-title">
 			<img src="img/volcano.svg" alt="Volcano icon" />
             <h1 class="cover-heading"><span class="text-danger">Floor</span> is <span class="text-warning">Lava</span>
@@ -31,6 +32,14 @@
         </section>
         <section class="cover-message">
             <pre><code class="highscore-heading text-danger lead">High Score:</code></pre>
+=======
+        <section class="cover-message">
+            <h1 class="cover-heading"><span class="text-danger">Floor</span> is <span class="text-warning">Lava</span>
+            </h1>
+        </section>
+        <section class="cover-message highscore-message">
+            <pre><code class="highscore-heading text-success lead">High Score:</code></pre>
+>>>>>>> 0735a88a88af407e33bcaccc672ce29fd5cd2861
 
             <!--  Print the highest score stored -->
             <?php
@@ -72,7 +81,11 @@
                         $userName  = $userInfo[0]; // username
                         $userScore = $userInfo[1]; // score
                         
+<<<<<<< HEAD
                         echo "<code class='lead highscore-description cover-message-score'><kbd class='text-warning'>$userName</kbd>
+=======
+                        echo "<code class='lead highscore-description'><kbd class='text-warning'>$userName</kbd>
+>>>>>>> 0735a88a88af407e33bcaccc672ce29fd5cd2861
                                 <span class='text-white'>$userScore seconds</span></code>";
                         $_SESSION['highscoreUsername'] = $userName;
                         $_SESSION['highscore']         = $userScore;
