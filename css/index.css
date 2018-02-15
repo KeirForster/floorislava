@@ -6,7 +6,6 @@ html,
 body {
     height: 100%;
     background-color: #333;
-    font-size: 1rem;
 }
 
 body {
@@ -28,95 +27,136 @@ body {
 /*
  * Main
  */
-@media (min-width: 300px) {
-    .cover .cover-message {
-        padding-bottom: 1.75em;
-    }
 
-    .cover .highscore-message {
-        padding-bottom: 5em;
+/* Handles title and volcano hanging effects */
+@-webkit-keyframes hvr-hang {
+    0% {
+        -webkit-transform: translateY(12px);
+        transform: translateY(12px);
     }
-
-    .cover-container .cover-heading {
-        font-size: 2.75rem;
+    50% {
+        -webkit-transform: translateY(6px);
+        transform: translateY(6px);
     }
-
-    .cover .highscore-heading {
-        font-size: 1.5rem;
+    100% {
+        -webkit-transform: translateY(12px);
+        transform: translateY(12px);
     }
-
-    .cover .highscore-description {
-        font-size: 1.25rem;
+}
+@keyframes hvr-hang {
+    0% {
+        -webkit-transform: translateY(12px);
+        transform: translateY(12px);
     }
-
-    .cover .form-signin input[name="username"] {
-        margin-bottom: 30px;
-        height: 4rem;
-        font-size: 2rem;
+    50% {
+        -webkit-transform: translateY(6px);
+        transform: translateY(6px);
     }
+    100% {
+        -webkit-transform: translateY(12px);
+        transform: translateY(12px);
+    }
+}
+.cover-message img {
+    width: 50%;
+}
 
-    .cover .form-signin button[type="submit"] {
-        font-size: 2rem;
-        height: 4rem;
+.cover-message-title {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    -webkit-animation-name: hvr-hang-sink, hvr-hang;
+    animation-name: hvr-hang-sink, hvr-hang;
+    -webkit-animation-duration: .3s, 1.5s;
+    animation-duration: .3s, 1.5s;
+    -webkit-animation-delay: 0s, .3s;
+    animation-delay: 0s, .3s;
+    -webkit-animation-timing-function: ease-out, ease-in-out;
+    animation-timing-function: ease-out, ease-in-out;
+    -webkit-animation-iteration-count: 1, infinite;
+    animation-iteration-count: 1, infinite;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-direction: normal, alternate;
+    animation-direction: normal, alternate;
+}
+
+
+/* Handles the pulsing of the highscore display */
+@-webkit-keyframes hvr-pulse {
+    25% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+    }
+    75% {
+        -webkit-transform: scale(0.5);
+        transform: scale(0.5);
+    }
+}
+@keyframes hvr-pulse {
+    25% {
+        -webkit-transform: scale(1.01);
+        transform: scale(1.01);
+    }
+    75% {
+        -webkit-transform: scale(0.99);
+        transform: scale(0.99);
     }
 }
 
-@media (min-width: 576px) {
-    .cover-container .cover-heading {
-        font-size: 5rem;
-    }
-
-    .cover .highscore-heading {
-        font-size: 1.75rem;
-    }
-
-    .cover .highscore-description {
-        font-size: 1.75rem;
-    }
-
-    .cover .highscore-description kbd {
-        font-size: 1.75rem;
-    }
+.cover-message-score {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    -webkit-animation-name: hvr-pulse;
+    animation-name: hvr-pulse;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
 }
 
-@media (min-width: 768px) {
-    .cover-container .cover-heading {
-        font-size: 6rem;
-    }
+/* Other homepage styling */
 
-    .cover .highscore-heading {
-        font-size: 3rem;
-    }
-
-    .cover .highscore-description {
-        font-size: 2rem;
-    }
-
-    .cover .highscore-description kbd {
-        font-size: 1.75rem;
-    }
-}
-
-@media (min-width: 992px) {
-    .cover-container .cover-heading {
-        font-size: 6rem;
-    }
-
-    .cover .highscore-heading {
-        font-size: 3rem;
-    }
-
-    .cover .highscore-description {
-        font-size: 2rem;
-    }
-
-    .cover .highscore-description kbd {
-        font-size: 1.75rem;
-    }
+.cover {
+    padding: 0 1.5rem;
 }
 
 .cover .cover-heading {
+    font-size: 6rem;
     font-family: 'Unica One', cursive;
+}
+
+.cover .highscore-heading {
+    font-size: 2.75rem;
+}
+
+.cover .highscore-description {
+    font-size: 1.5rem;
+}
+
+.cover .highscore-description kbd {
+    font-size: 1.5rem;
+}
+
+.cover .cover-message {
+    padding-bottom: 3em;
+}
+
+.cover .form-signin input[name="username"] {
+    margin-bottom: 30px;
+    height: 80px;
+    font-size: 2.25rem;
+}
+
+.cover .form-signin button[type="submit"] {
+    font-size: 2.25rem;
 }
 
 /*
