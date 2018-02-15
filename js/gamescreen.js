@@ -36,6 +36,12 @@ class GS_Timing
             timingInfo.minutes++;
             timingInfo.seconds = 0
         }
+
+        if (timingInfo.seconds === 1)
+        {
+            // lanuch the game over modal
+            $('#gameover-modal').modal('show');
+        }
         elem.innerHTML = `${timingInfo.minutes}:${timingInfo.seconds}.${timingInfo.millis < 10 ? 0 : ''}${timingInfo.millis}`;
     }
 
@@ -97,7 +103,7 @@ class GS_run
     //not currently working for the setTimeout.
     timedLava()
     {
-        this.growLava();
+        this.context.requestAnimationFrame(this.growLava());
         //setTimeout(this.generateLava(this.amountOfLava), 3000);
         // this.generateLava(this.amountOfLava);
     }

@@ -21,78 +21,97 @@ session_start();
 </head>
 
 <body class="text-center">
-<div class="container-fluid">
-    <!-- title section -->
-    <header class="top-section">
-        <!-- game info -->
-        <div class="row no-gutters">
-            <div class="col-12">
-                <h1 class="game-title">Floor is Lava</h1>
-                <?php
-                // print header info
-                echo "<code class='lead text-success highscore-description'>High Score:
-                                    <kbd class='text-warning'>" . $_SESSION['highscoreUsername'] . "</kbd>
-                                    <span class='text-danger'>" . $_SESSION['highscore'] . " <span class='highscore-description-extra'>seconds</span></span>
-                                    </code>";
+    <div class="container-fluid">
+        <!-- title section -->
+        <header class="top-section">
+            <!-- game info -->
+            <div class="row no-gutters">
+                <div class="col-12">
+                    <h1 class="game-title">Floor is Lava</h1>
+                    <?php
+                    // print header info
+                    echo "<code class='lead text-success highscore-description'>High Score:
+                                        <kbd class='text-warning'>" . $_SESSION['highscoreUsername'] . "</kbd>
+                                        <span class='text-danger'>" . $_SESSION['highscore'] . " <span class='highscore-description-extra'>seconds</span></span>
+                                        </code>";
 
-                // username successfully retrieved
-                if (isset($_POST['username']))
+                    // username successfully retrieved
+                    if (isset($_POST['username']))
+                    {
+                        echo "<code class='text-primary lead player-description'>Player:
+                                        <kbd class='player-username'>" . $_POST["username"] . "</kbd></code>";
+                    }
+
+                    // no username found
+                    else
+                    {
+                        echo "<code class='text-success lead'>Player:
+                                        <kbd><span class='text-warning'>None</span></kbd></code>";
+                    }
+                    ?>
+                </div>
+            </div>
+            <!-- player score -->
+            <div class="row no-gutters player-score">
+                <div class="col-12">
+                    <code class="lead"><span class='text-white'><span id='player-time'></span> seconds</span></code>
+                </div>
+            </div>
+        </header>
+        <main class="row">
+            <div class="col-12 bottom-section">
+                <canvas id="gameCanvas"></canvas>
+            </div>
+        </main>
+        <!-- Game over Modal -->
+        <div class="modal fade" id="gameover-modal" tabindex="-1" role="dialog" aria-labelledby="gameover" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <h1 class="modal-title text-center text-dark">Game Over</h1>
+                    <div class="modal-body"></div>
+                    <div class="modal-footer">
+                        <div class="container">
+                            <div class="row">
+                                <button type="button" id="quit" class="btn btn-secondary col-6 quit" data-dismiss="modal">Quit</button>
+                                <button type="button" id="play-again" class="btn btn-danger col-6">Play again</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- start the game timer -->
+    <script>
+        onload = function()
+        {
+            var timer = new GS_Timing(document.getElementById('player-time'));
+            timer.start();
+            timer.elem.onclick = function()
+            {
+                if (timer.isRunning)
                 {
-                    echo "<code class='text-primary lead player-description'>Player:
-                                    <kbd class='player-username'>" . $_POST["username"] . "</kbd></code>";
+                    timer.stop();
                 }
 
-                // no username found
                 else
                 {
-                    echo "<code class='text-success lead'>Player:
-                                    <kbd><span class='text-warning'>None</span></kbd></code>";
+                    timer.resume();
                 }
-                ?>
-            </div>
-        </div>
-        <!-- player score -->
-        <div class="row no-gutters player-score">
-            <div class="col-12">
-                <code class="lead"><span class='text-white'><span id='player-time'></span> seconds</span></code>
-            </div>
-        </div>
-    </header>
-    <main class="row">
-        <div class="col-12 bottom-section">
-            <canvas id="gameCanvas"></canvas>
-        </div>
-    </main>
-</div>
-<!-- start the game timer -->
-<script>
-    onload = function()
-    {
-        var timer = new GS_Timing(document.getElementById('player-time'));
-        timer.start();
-        timer.elem.onclick = function()
-        {
-            if (timer.isRunning)
-            {
-                timer.stop();
-            }
+            };
+            // let game = new GS_run(document.getElementById('gameCanvas'));
+            // game.start();
+            //was trying to use the mouse position to show a basic checker
+            // game.elem.onmouseover = function()
+            // {
+            //     let mouseX = game.getMousePos(game.elem)[0];
+            //     let mouseY = game.getMousePos(game.elem)[1];
+            //     console.log(mouseX + " " + mouseY);
+            // };
 
-            else
-            {
-                timer.resume();
-            }
+
         };
-        let game = new GS_run(document.getElementById('gameCanvas'));
-        game.start();
-        //was trying to use the mouse position to show a basic checker
-        // game.elem.onmouseover = function()
-        // {
-        //     let mouseX = game.getMousePos(game.elem)[0];
-        //     let mouseY = game.getMousePos(game.elem)[1];
-        //     console.log(mouseX + " " + mouseY);
-        // };
-    };
-</script>
+    </script>
 </body>
 <!-- Bootstrap core JavaScript
     ================================================== -->
