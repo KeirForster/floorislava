@@ -75,8 +75,8 @@ class GS_Game{
     constructor(containerElem, timer) {
         this.container = containerElem;
         this.timer = timer;
-        this.containerWidth = this.container.width;
-        this.containerHeight = this.container.height;
+        this.containerWidth = this.container.getBoundingClientRect().width;
+        this.containerHeight = this.container.getBoundingClientRect().height;
         this.gameObjs = [];
         this.mouseX = null;
         this.mouseY = null;
@@ -126,22 +126,58 @@ class GS_Game{
 
     moveGameObjs()
     {
-        var gameObjPos = 0;
+        var gameObjPosX = 0;
+        var gameObjPosY = 0;
+        var movXPositive = true;
+        var movYPositive = true;
         var animateObj= setInterval(move, 5, this);
 
-        function move(gameObj)
+        function move($this)
         {
-            if (gameObj.collision())
+            if ($this.collision())
             {
                 clearInterval(animateObj);
-                gameObj.endGame();
+                $this.endGame();
             }
-            if (gameObjPos === 300) {
-                clearInterval(animateObj);
-            } else {
-                gameObjPos++;
-                gameObj.gameObjs[0].style.top = gameObjPos + 'px';
-                gameObj.gameObjs[0].style.left = gameObjPos + 'px';
+
+            // right boundary
+            if (gameObjPosX >= $this.containerWidth - 50) {
+                movXPositive = false;
+            }
+
+            // bottom boundary
+            if (gameObjPosY >= $this.containerHeight - 50) {
+                movYPositive = false;
+            }
+
+            // left boundary
+            if (gameObjPosX === 0) {
+                movXPositive = true;
+            }
+
+            // top boundary
+            if (gameObjPosY === 0) {
+                movYPositive = true;
+            }
+
+            if (movYPositive)
+            {
+                $this.gameObjs[0].style.top = ++gameObjPosY + 'px';
+            }
+
+            else
+            {
+                $this.gameObjs[0].style.top = --gameObjPosY + 'px';
+            }
+
+            if (movXPositive)
+            {
+                $this.gameObjs[0].style.left = ++gameObjPosX + 'px';
+            }
+
+            else
+            {
+                $this.gameObjs[0].style.left = --gameObjPosX + 'px';
             }
         }
     }
