@@ -99,6 +99,24 @@ session_start();
                     timer.resume();
                 }
             };
+            startGame(timer);
+
+
+            $(document).ready(function(){
+                $("html").keydown(function(e){
+                    if (e.which == 38)
+                    {
+                        accelerate(-0.2);
+                    }
+                });
+                $("html").keyup(function(e){
+                    if (e.which == 40)
+                    {
+                        accelerate(0.05);
+                    }
+                });
+            });
+
             // let game = new GS_run(document.getElementById('gameCanvas'));
             // game.start();
             //was trying to use the mouse position to show a basic checker
@@ -128,6 +146,7 @@ session_start();
         crossorigin="anonymous"></script>
 <!-- My scripts -->
 <script src="../js/gamescreen.js"></script>
+<script src="../js/dodgethelava.js"></script>
 </body>
 
 </html>
