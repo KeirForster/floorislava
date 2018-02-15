@@ -40,7 +40,7 @@ class GS_Timing
         if (timingInfo.seconds === 1)
         {
             // lanuch the game over modal
-            $('#gameover-modal').modal('show');
+            // $('#gameover-modal').modal('show');
         }
         elem.innerHTML = `${timingInfo.minutes}:${timingInfo.seconds}.${timingInfo.millis < 10 ? 0 : ''}${timingInfo.millis}`;
     }
