@@ -165,3 +165,17 @@ body {
 .mastfoot {
     color: rgba(255, 255, 255, .5);
 }
+
+/*
+* how to play
+*/
+.modal-title{
+  color: rgb(205,68,74);
+}
+
+.modal-content{
+  background-color: rgb(51,51,51);
+}
+.modal-body{
+  color: rgb(247,195,68);
+}

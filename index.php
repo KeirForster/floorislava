@@ -36,25 +36,22 @@
             <?php
                 $userInfo = getUserInfo();
                 printHighestScore($userInfo);
-                
+
                 function getUserInfo()
                 {
                     $filename          = 'db/scores.txt';
                     $fHandle           = fopen($filename, 'r'); // attempt to open the file
                     $highestScoreFound = false;
                     $userInfo          = null;
-                    
+
                     // successfully opened file
-                    if ($fHandle)
-                    {
+                    if ($fHandle) {
                         // loop through file until end
-                        while (!feof($fHandle) && !$highestScoreFound)
-                        {
+                        while (!feof($fHandle) && !$highestScoreFound) {
                             $buffer = fgets($fHandle); // get the next line
-                            
+
                             // contains an entry
-                            if ($buffer)
-                            {
+                            if ($buffer) {
                                 $userInfo          = explode(",", $buffer); // split string on ','
                                 $highestScoreFound = true;
                             }
@@ -63,28 +60,26 @@
                     }
                     return $userInfo;
                 }
-                
+
                 function printHighestScore($userInfo)
                 {
                     // a score has been successfully retrieved
-                    if ($userInfo)
-                    {
+                    if ($userInfo) {
                         $userName  = $userInfo[0]; // username
                         $userScore = $userInfo[1]; // score
-                        
+
                         echo "<code class='lead highscore-description cover-message-score'><kbd class='text-warning'>$userName</kbd>
                                 <span class='text-white'>$userScore seconds</span></code>";
                         $_SESSION['highscoreUsername'] = $userName;
                         $_SESSION['highscore']         = $userScore;
                     }
-                    
+
                     // no score retrieved
-                    else
-                    {
+                    else {
                         echo "<kbd class='lead description text-white highscore-description'>None</kbd>";
                     }
                 }
-            
+
             ?>
         </section>
         <!-- send username input to gamescreen page -->
@@ -93,7 +88,34 @@
             <input type="text" name="username" class="form-control" placeholder="username" required autofocus>
             <button class="btn btn-lg btn-danger btn-block" type="submit">Play</button>
         </form>
-    </main>
+        <button class="btn btn-lg btn-danger btn-block" type="submit" data-toggle="modal" data-target="#exampleModalCenter">How to play</button>
+        </main>
+
+        <!-- How to play -->
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <h5 class="modal-title text-center"id="exampleModalLongTitle">How To Play</h5>
+        <div class="modal-body">
+          Move your mouse to avoid the incoming lava swell!
+        </div>
+        <div class="container">
+          <div class="row">
+              <button type="button" class="btn btn-secondary col-6 mx-auto" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        </div>
+        </div>
+        </div>
+
+        <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p>&copy; CST Web and Mobile 2018</p>
+        </div>
+        </footer>
+        </div>
+
 
     <footer class="mastfoot mt-auto">
         <div class="inner">
