@@ -7,11 +7,11 @@ class GS_Timing
         this.timer = null;
         this.isRunning = false;
         this.timingInfo =
-            {
-                millis: 0,
-                seconds: 0,
-                minutes: 0
-            };
+                {
+                    millis: 0,
+                    seconds: 0,
+                    minutes: 0
+                };
     }
 
     // public methods
@@ -37,12 +37,12 @@ class GS_Timing
             timingInfo.seconds = 0
         }
 
-        if (timingInfo.seconds === 1)
-        {
-            // lanuch the game over modal
-            // $('#gameover-modal').modal('show');
-        }
-        elem.innerHTML = `${timingInfo.minutes}:${timingInfo.seconds}.${timingInfo.millis < 10 ? 0 : ''}${timingInfo.millis}`;
+        // if (timingInfo.seconds == 1)
+        // {
+        //     $('#gameover-modal').modal('show');
+        // }
+
+        elem.innerHTML = `${timingInfo.minutes}:${timingInfo.minutes > 0 && timingInfo.seconds < 10 ? 0 : ''}${timingInfo.seconds}.${timingInfo.millis < 10 ? 0 : ''}${timingInfo.millis}`;
     }
 
     stop()
@@ -52,6 +52,13 @@ class GS_Timing
             clearInterval(this.timer);
             this.isRunning = false;
         }
+    }
+
+    reset()
+    {
+        this.timingInfo.millis = 0;
+        this.timingInfo.seconds = 0;
+        this.timingInfo.minutes = 0;
     }
 
     resume()
@@ -64,155 +71,78 @@ class GS_Timing
     }
 }
 
-class GS_run
-{
-
-
-    constructor(elem){
-        // public variables
-        this.elem = elem;
-        if(elem.getContext){
-            this.context = elem.getContext('2d');
-        } else {
-            elem.innerHTML = "Canvas-unsupported";
-        }
-        this.isRunning = false;
-        this.circles = [];
-        this.newCircles = [];
-        this.alive = true;
-        this.amountOfLava = 16;
-        this.speedOfCircle = 3;
-        this.maxCircleSize = 50;
+class GS_Game{
+    constructor(containerElem, timer) {
+        this.container = containerElem;
+        this.timer = timer;
+        this.containerWidth = this.container.width;
+        this.containerHeight = this.container.height;
+        this.gameObjs = [];
+        this.mouseX = null;
+        this.mouseY = null;
     }
 
-    // public methods
     start()
     {
-        this.generateLava(this.amountOfLava);
-        this.timedLava();
-        //requestAnimationFrame(this.draw);
-        //This is trying to find the position of the mouse, and using the values in the circles array
-        //to detect if the mouse is in a circle
-        //currently not in use
-        // let mousePos = this.getMousePos(this.elem);
-        // if(this.context.isPointInPath(mousePos[0], mousePos[1])){
-        //
-        // }
+        this.createGameObj();
+        this.moveGameObjs();
+        // this.createGameObj();
     }
 
-    //not currently working for the setTimeout.
-    timedLava()
+    mousemove(event)
     {
-        this.context.requestAnimationFrame(this.growLava());
-        //setTimeout(this.generateLava(this.amountOfLava), 3000);
-        // this.generateLava(this.amountOfLava);
-    }
-
-    //creates circles of lava
-    //amountOfLava is the number of circles
-    generateLava(amountOfLava)
-    {
-        let i = 0;
-        let maxSize = 40; // in Rads
-        let minSize = 10;
-        while(this.alive){
-            let passed = true;
-            //random value for height and width between 1 and the max amount
-            let randomX = Math.floor((Math.random() * this.elem.width) + 25);
-            let randomY = Math.floor((Math.random() * this.elem.height) + 25);
-            let randomRadius = Math.floor((Math.random() * maxSize) + minSize);
-            this.circles[i] = [2];
-            this.circles[i][0] = randomX;
-            this.circles[i][1] = randomY;
-            this.circles[i][2] = randomRadius;
-
-            for(let n = 0; n < this.circles.length - 1; ++n){
-                if (this.circles[n][0] ===  randomX &&
-                    this.circles[n][1] === randomY){
-                    passed = false;
-                }
-            }
-            if(passed === true){
-                //creates the circle
-                //
-                i++;
-                if(i === amountOfLava) {
-                    this.alive = false;
-                }
-            }
+        this.mouseX = event.clientX;
+        this.mouseY = event.clientY;
+        if (this.collision())
+        {
+            this.endGame();
         }
     }
 
-    //creates a circle with passed parameters
-    circ(xPosition, yPosition, sizeInRads, colorOfCircle)
+    collision()
     {
-        this.context.fillStyle = colorOfCircle;
-        this.context.beginPath();
-        this.context.arc(xPosition, yPosition, sizeInRads, 0, 2 * Math.PI, false);
-        this.context.closePath();
-        this.context.fill();
+        var gamObj = this.gameObjs[0].getBoundingClientRect();
+        if (this.mouseX >= gamObj.x &&
+            this.mouseX <= (gamObj.width + gamObj.x) &&
+            this.mouseY >= gamObj.y &&
+            this.mouseY <= gamObj.height + gamObj.y) {
+            return true;
+        }
     }
 
-    growLava()
+    endGame()
     {
-        this.context.globalCompositeOperation = 'source-over';
-        //clear the inside of the canvas
-        this.context.clearRect(0, 0, this.elem.width, this.elem.height);
-        for(let i = 0; i < this.circles.length; ++i){
-            this.circ(this.circles[i][0], this.circles[i][1], this.circles[i][2], "#ff0000");
-            this.circles[i][2] += this.speedOfCircle;
-            if(this.circles[i][2] > this.maxCircleSize){
-                this.circles.slice(i, 1);
+        $('#gameover-modal').modal('show');
+    }
+
+    createGameObj()
+    {
+        var gameObj = document.createElement('div');
+        gameObj.id = 'gameObj' + this.gameObjs.length;
+        gameObj.classList.add('gameObj');
+        this.container.appendChild(gameObj);
+        this.gameObjs.push(gameObj);
+    }
+
+    moveGameObjs()
+    {
+        var gameObjPos = 0;
+        var animateObj= setInterval(move, 5, this);
+
+        function move(gameObj)
+        {
+            if (gameObj.collision())
+            {
+                clearInterval(animateObj);
+                gameObj.endGame();
+            }
+            if (gameObjPos === 300) {
+                clearInterval(animateObj);
+            } else {
+                gameObjPos++;
+                gameObj.gameObjs[0].style.top = gameObjPos + 'px';
+                gameObj.gameObjs[0].style.left = gameObjPos + 'px';
             }
         }
-        this.context.drawImage(this.context, 0, 0);
-        this.context.webkitRequestAnimationFrame(draw);
-    }
-
-    //this is for creating circles that expand.
-    //if you can get this working, cool
-    //stolen from
-    // http://jsfiddle.net/VZ8R4/145/
-    //not in use
-    draw()
-    {
-        // let randomRadius = Math.floor((Math.random() * maxSize) + minSize);
-        for (let i = this.circles.length - 1; i >= 0 ; --i){
-            this.circ(this.circles[i].x, this.circles[i].y, this.circles[i].radius, this.circles[i].color);
-            this.circles[i].radius += this.speed;
-            if(this.circles.radius > this.elem.width) {
-                this.newCircles.slice(i, 1);
-            }
-        }
-
-        this.context.drawImage(scratch, 0, 0);
-        window.webkitRequestAnimationFrame(draw);
-    }
-
-    //not in use
-    getMousePos(elem)
-    {
-        let rect = elem.getBoundingClientRect();
-        return {
-            x: event.clientX - rect.left,
-            y: event.clientY - rect.top
-        };
-    }
-
-    //start button?  not in use
-    startButtonCreate()
-    {
-        this.context.beginPath();
-        this.context.rect(this.elem.width / 2, this.elem.height / 2 - 10, 20, 10);
-        this.context.fillStyle = '#FFFFFF';
-        this.context.fillStyle = 'rgba(225,225,225,0.5)';
-        this.context.fill();
-        this.context.lineWidth = 1;
-        this.context.strokeStyle = '#000000';
-        this.context.stroke();
-        this.context.closePath();
-        this.context.font = '8pt Kremlin Pro Web';
-        this.context.fillStyle = '#000000';
-        this.context.fillText('Start', this.elem.width / 2, this.elem.height / 2);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 // Start the session
 session_start();
+require_once '../php/Utility.php';
 ?>
 
 <html lang="en">
@@ -62,7 +63,7 @@ session_start();
         </header>
         <main class="row">
             <div class="col-12 bottom-section">
-                <canvas id="gameCanvas"></canvas>
+                <div id="gameElem" onmouseenter="startGame()" onmouseleave="endGame()" onmousemove="mousemove(event)"></div>
             </div>
         </main>
         <!-- Game over Modal -->
@@ -73,10 +74,16 @@ session_start();
                     <div class="modal-body"></div>
                     <div class="modal-footer">
                         <div class="container">
-                            <div class="row">
-                                <button type="button" id="quit" class="btn btn-secondary col-6 quit" data-dismiss="modal">Quit</button>
-                                <button type="button" id="play-again" class="btn btn-danger col-6">Play again</button>
-                            </div>
+                            <form action="../index.php" method="POST">
+                                <div class="row">
+                                <button type="submit" id="quit" class="btn btn-secondary col-6 quit" data-dismiss="modal">Quit</button>
+                                </div>
+                            </form>
+                            <form action="" method="POST">
+                                <div class="row">
+                                    <button type="submit" id="play-again" class="btn btn-danger col-6">Play again</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -85,52 +92,27 @@ session_start();
     </div>
     <!-- start the game timer -->
     <script>
-        onload = function()
+        var game = null;
+        var timer = null;
+
+        function startGame()
         {
-            var timer = new GS_Timing(document.getElementById('player-time'));
+            timer = new GS_Timing(document.getElementById('player-time'));
             timer.start();
-            timer.elem.onclick = function()
-            {
-                if (timer.isRunning)
-                {
-                    timer.stop();
-                }
+            game = new GS_Game(document.getElementById('gameElem'), timer);
+            game.start();
+        }
 
-                else
-                {
-                    timer.resume();
-                }
-            };
-            startGame(timer);
+        function endGame()
+        {
+            timer.stop();
+            game.endGame();
+        }
 
-
-            $(document).ready(function(){
-                $("html").keydown(function(e){
-                    if (e.which == 38)
-                    {
-                        accelerate(-0.2);
-                    }
-                });
-                $("html").keyup(function(e){
-                    if (e.which == 40)
-                    {
-                        accelerate(0.05);
-                    }
-                });
-            });
-
-            // let game = new GS_run(document.getElementById('gameCanvas'));
-            // game.start();
-            //was trying to use the mouse position to show a basic checker
-            // game.elem.onmouseover = function()
-            // {
-            //     let mouseX = game.getMousePos(game.elem)[0];
-            //     let mouseY = game.getMousePos(game.elem)[1];
-            //     console.log(mouseX + " " + mouseY);
-            // };
-
-
-        };
+        function mousemove(event)
+        {
+            game.mousemove(event);
+        }
     </script>
 </body>
 <!-- Bootstrap core JavaScript
@@ -148,7 +130,6 @@ session_start();
         crossorigin="anonymous"></script>
 <!-- My scripts -->
 <script src="../js/gamescreen.js"></script>
-<script src="../js/dodgethelava.js"></script>
 </body>
 
 </html>
