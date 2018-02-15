@@ -163,3 +163,20 @@ body {
     height: 100%;
     border: 2px solid greenyellow;
 }
+
+#gameover-modal .modal-title {
+    padding: 1rem;
+}
+
+#gameover-modal .modal-footer {
+    border-top: none;
+}
+
+#gameover-modal #quit {
+    padding-right: 1rem;
+    /*margin:auto;*/
+}
+
+#gameover-modal #play-again {
+    padding-left: 1rem;
+}
