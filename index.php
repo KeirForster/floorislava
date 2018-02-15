@@ -89,33 +89,25 @@
             <button class="btn btn-lg btn-danger btn-block" type="submit">Play</button>
         </form>
         <button class="btn btn-lg btn-danger btn-block" type="submit" data-toggle="modal" data-target="#exampleModalCenter">How to play</button>
-        </main>
+    </main>
 
         <!-- How to play -->
         <!-- Modal -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <h5 class="modal-title text-center"id="exampleModalLongTitle">How To Play</h5>
-        <div class="modal-body">
-          Move your mouse to avoid the incoming lava swell!
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <h5 class="modal-title text-center"id="exampleModalLongTitle">How To Play</h5>
+                    <div class="modal-body">
+                        Move your mouse to avoid the incoming lava swell!
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <button type="button" class="btn btn-secondary col-6 mx-auto" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+            </div>
         </div>
-        <div class="container">
-          <div class="row">
-              <button type="button" class="btn btn-secondary col-6 mx-auto" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-        </div>
-        </div>
-        </div>
-
-        <footer class="mastfoot mt-auto">
-        <div class="inner">
-          <p>&copy; CST Web and Mobile 2018</p>
-        </div>
-        </footer>
-        </div>
-
+    </div>
 
     <footer class="mastfoot mt-auto">
         <div class="inner">
