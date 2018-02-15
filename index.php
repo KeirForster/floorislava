@@ -99,7 +99,7 @@
                 <div class="modal-content">
                     <h5 class="modal-title text-center"id="exampleModalLongTitle">How To Play</h5>
                     <div class="modal-body">
-                        <p>Use the left and right keys to move your avatar across the screen. Be sure to avoid the flaming red columns!</p>
+                        <p>Use the Up arrow key to make your avatar jump. Be sure to avoid the flaming red columns!</p>
                     </div>
                     <div class="container">
                         <div class="row">
