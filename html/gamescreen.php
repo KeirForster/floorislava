@@ -50,14 +50,15 @@ session_start();
                                         <kbd><span class='text-warning'>None</span></kbd></code>";
                     }
                     ?>
-                </div>
-            </div>
-            <!-- player score -->
+                    <!-- player score -->
             <div class="row no-gutters player-score">
                 <div class="col-12">
                     <code class="lead"><span class='text-white'><span id='player-time'></span> seconds</span></code>
                 </div>
             </div>
+                </div>
+            </div>
+            
         </header>
         <main class="row">
             <div class="col-12 bottom-section">
