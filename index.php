@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>FloorIsLava</title>
+    <title>Dodge the Lava</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -26,7 +26,7 @@
     <main role="main" class="inner cover mt-auto">
         <section class="cover-message cover-message-title">
 			<img src="img/volcano.svg" alt="Volcano icon" />
-            <h1 class="cover-heading"><span class="text-danger">Floor</span> is <span class="text-warning">Lava</span>
+            <h1 class="cover-heading"><span class="text-danger">Dodge</span> the <span class="text-warning">Lava</span>
             </h1>
         </section>
         <section class="cover-message">
@@ -98,7 +98,7 @@
                 <div class="modal-content">
                     <h5 class="modal-title text-center"id="exampleModalLongTitle">How To Play</h5>
                     <div class="modal-body">
-                        Move your mouse to avoid the incoming lava swell!
+                        <p>Use the left and right keys to move your avatar across the screen. Be sure to avoid the flaming red columns!</p>
                     </div>
                     <div class="container">
                         <div class="row">
