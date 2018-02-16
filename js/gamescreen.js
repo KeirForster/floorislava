@@ -80,12 +80,20 @@ class GS_Game{
         this.gameObjs = [];
         this.mouseX = null;
         this.mouseY = null;
+        this.objWidth = 75;
     }
 
     start()
     {
-        this.createGameObj();
-        this.moveGameObjs();
+        // this.createGameObj();
+        // this.createGameObj();
+
+        // for (var i = )
+        for (var i = 0; i < 10; i++)
+        {
+            this.createGameObj(i);
+            this.moveGameObjs(this.gameObjs[i], i);
+        }
         // this.createGameObj();
     }
 
@@ -99,14 +107,31 @@ class GS_Game{
         }
     }
 
-    collision()
+    collision(i)
     {
-        var gamObj = this.gameObjs[0].getBoundingClientRect();
-        if (this.mouseX >= gamObj.x &&
-            this.mouseX <= (gamObj.width + gamObj.x) &&
-            this.mouseY >= gamObj.y &&
-            this.mouseY <= gamObj.height + gamObj.y) {
-            return true;
+        if (i != -1)
+        {
+            for (var j = 0; j < this.gameObjs.length; j++)
+            {
+                var gamObj = this.gameObjs[j].getBoundingClientRect();
+                if (this.mouseX >= gamObj.x &&
+                    this.mouseX <= (gamObj.width + gamObj.x) &&
+                    this.mouseY >= gamObj.y &&
+                    this.mouseY <= gamObj.height + gamObj.y) {
+                    return true;
+                }
+            }
+        }
+
+        else
+        {
+            var gamObj = this.gameObjs[i].getBoundingClientRect();
+            if (this.mouseX >= gamObj.x &&
+                this.mouseX <= (gamObj.width + gamObj.x) &&
+                this.mouseY >= gamObj.y &&
+                this.mouseY <= gamObj.height + gamObj.y) {
+                return true;
+            }
         }
     }
 
@@ -115,7 +140,7 @@ class GS_Game{
         $('#gameover-modal').modal('show');
     }
 
-    createGameObj()
+    createGameObj(i)
     {
         var gameObj = document.createElement('div');
         gameObj.id = 'gameObj' + this.gameObjs.length;
@@ -124,29 +149,30 @@ class GS_Game{
         this.gameObjs.push(gameObj);
     }
 
-    moveGameObjs()
+    moveGameObjs(gameObj, i)
     {
         var gameObjPosX = 0;
         var gameObjPosY = 0;
         var movXPositive = true;
-        var movYPositive = true;
+        var movYPositive = 0;
+        var moveSpeed = 3;
         var animateObj= setInterval(move, 5, this);
 
         function move($this)
         {
-            if ($this.collision())
+            if ($this.collision(i))
             {
                 clearInterval(animateObj);
                 $this.endGame();
             }
 
             // right boundary
-            if (gameObjPosX >= $this.containerWidth - 50) {
+            if (gameObjPosX >= $this.containerWidth - $this.objWidth) {
                 movXPositive = false;
             }
 
             // bottom boundary
-            if (gameObjPosY >= $this.containerHeight - 50) {
+            if (gameObjPosY >= $this.containerHeight - $this.objWidth) {
                 movYPositive = false;
             }
 
@@ -162,22 +188,22 @@ class GS_Game{
 
             if (movYPositive)
             {
-                $this.gameObjs[0].style.top = ++gameObjPosY + 'px';
+                gameObj.style.top = (gameObjPosY += moveSpeed) + 'px';
             }
 
             else
             {
-                $this.gameObjs[0].style.top = --gameObjPosY + 'px';
+                gameObj.style.top = (gameObjPosY -= moveSpeed) + 'px';
             }
 
             if (movXPositive)
             {
-                $this.gameObjs[0].style.left = ++gameObjPosX + 'px';
+                gameObj.style.left = (gameObjPosX += moveSpeed) + 'px';
             }
 
             else
             {
-                $this.gameObjs[0].style.left = --gameObjPosX + 'px';
+                gameObj.style.left = (gameObjPosX -= moveSpeed) + 'px';
             }
         }
     }
