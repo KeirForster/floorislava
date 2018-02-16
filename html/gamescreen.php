@@ -1,7 +1,6 @@
 <?php
 // Start the session
 session_start();
-require_once '../php/Utility.php';
 ?>
 
 <html lang="en">
